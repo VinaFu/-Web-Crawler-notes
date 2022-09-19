@@ -1,5 +1,7 @@
 # -notes
 
+用F12去看内容
+
 1. http & https
 
     1.1 http & https
@@ -27,7 +29,7 @@
          general里面有：
          1）request URL
          2）request method
-         3）status code：200 - success
+         3）status code：200 - success；307redirect
          4）remote address：14.215.177.。。。
 
          请求体：请求行、请求头部、空行、请求数据（结构如下）
@@ -46,6 +48,10 @@
        1.3.3 request headers （请求头）
        
          常见的：
+         user-agent
+         host
+         referer 多一些
+         
          1）accept：什么类型的数据：文字、图片等
          2）accept- charset：接收的字符集？
          3）accept- encoding： 一般指压缩方法：gzip/ deflate/br
@@ -61,9 +67,46 @@
          13）referer：告诉服务器从哪个页面链接。防盗链接
          14）from：
          15）user- agent：浏览器本身身份：操作系统 Windows哪个版本
-         16）upgrade- insecure- requests： 自动从http升级到https。可以看到如果现有哥
+         16）upgrade- insecure- requests： 自动从http升级到https。可以看到如果现有
+         
+       1.3.5
+          
+          用：
+          response.request.method
+          response.request.url
+          response.request.headers 来查看请求中的信息
+          会自带一些默认的设置在里面，比如：accept- encoding、connection
+          
+    1.4 Response - 响应
 
-   
+       set-cookie：修改了
+       add-cookie：
+       1.4.1
+       
+       1.4.2 常见方法和属性
+           response.text
+           response.content
+           response.json（）
+           response.headers
+           response.encoding
+           response.apparent—encoding 
+           response.cookies     获取响应体的cookies
+           response.url
+           response.status——code  获取状态码
+            状态码   100-200:    server成功收到了请求
+                    200-299:    请求成功
+                    300-399:    重定向（URL位置变了，比如上面的307）；301永久重定向；302临时重定向-未登陆界面
+                    400-499:    客户端发送的请求地址有误（URL没有数据）；403权限不够
+                    500-599:    服务器问题（宕机）
+        1.4.3 json
+           在request.url里面看json
+           
+           格式：外层{} [] 包裹，嵌套数据         
+               {字段一:值1，字段二：{嵌套字段1：嵌套字段值}} -- string
+               和dictionary很像，但dictionary -- dict
+
+               response.json（）方法会在底层把string转换为dict形式。前提：json是规范的。有小括号啥的都不行，从大括号开始才是对的
+             
    
    
    
